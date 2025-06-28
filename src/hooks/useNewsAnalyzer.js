@@ -9,7 +9,7 @@ export default function useNewsAnalyzer() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSubmit = async ({ username }) => {
+  const handleSubmit = async (username) => {
     setLoading(true);
     setResult(null);
     setError(null);
@@ -17,16 +17,9 @@ export default function useNewsAnalyzer() {
     
 
     const formData = new FormData();
-    // if (file) formData.append('file', file);
 
-    if (!file && !text) {
-      setError('Please submit something to proceed.');
-      setLoading(false);
-      return;
-    }
     
     if (file){
-      console.log(file)
 
       // check file extension
       const fileName = file.name;
@@ -43,23 +36,28 @@ export default function useNewsAnalyzer() {
           key: key,
           data: file,
           options: {
-            accessLevel: 'private', // default is 'guest'
+            accessLevel: 'private',
             contentType: file.type,
           },
         }).result;
-        console.log(result.key)
         formData.append('filedir', result.key);
       } catch (err) {
         console.log("Error uploading file:", err)
         setError('Failed to upload file.');
+        return;
       } finally {
         setLoading(false);
-        return;
       }
-      
+    } else if (text.trim()){
+      formData.append('text', text);
+    } else {
+      setError('Please submit something to proceed.');
+      setLoading(false);
+      return;
     }
-    
-    if (text.trim()) formData.append('text', text);
+
+    console.log("this is formdata")
+    console.log(formData)
 
     try {
       const response = await axios.post(
@@ -73,6 +71,7 @@ export default function useNewsAnalyzer() {
     } finally {
       setLoading(false);
     }
+
   };
 
   return {
