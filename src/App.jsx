@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {
-  PutObjectCommand,
-  S3Client,
-  S3ServiceException,
-} from "@aws-sdk/client-s3";
 
 function App() {
   const [text, setText] = useState('');
