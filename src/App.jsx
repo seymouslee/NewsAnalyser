@@ -1,5 +1,6 @@
 import React from 'react';
 import useNewsAnalyzer from './hooks/useNewsAnalyzer';
+import SiteHeaders from './components/SiteHeaders';
 import TextAreaInput from './components/TextAreaInput';
 import FileUploader from './components/FileUploader';
 import SubmitButton from './components/SubmitButton';
@@ -17,7 +18,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center p-8">
-      <h1 className="text-3xl font-bold mb-6">News Analyzer</h1>
+      <SiteHeaders />
       <TextAreaInput text={text} setText={setText} />
       <FileUploader file={file} setFile={setFile} />
       <SubmitButton loading={loading} onClick={handleSubmit} />
