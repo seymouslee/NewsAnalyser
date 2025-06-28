@@ -23,9 +23,6 @@ function App() {
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
-      // setResult(response.data);
-      console.log(response);
-      console.log(response.data);
       setResult(response.data);
     } catch (err) {
       setError('Failed to analyze article.');
@@ -46,16 +43,16 @@ function App() {
         onChange={(e) => setText(e.target.value)}
       />
 
-      {/* <input
+      <input
         type="file"
         accept=".txt,.docx"
         onChange={(e) => setFile(e.target.files[0])}
         className="mb-4"
-      /> */}
+      />
 
         
     {/* File DropOff */}
-    <div className="flex items-center justify-center w-full">
+    {/* <div className="flex items-center justify-center w-full">
         <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -66,7 +63,7 @@ function App() {
             </div>
             <input id="dropzone-file" type="file" class="hidden" />
         </label>
-    </div> 
+    </div>  */}
 
     {/* submit */}
     <button onClick={handleSubmit} disabled={loading} type="button" class="py-2.5 px-5 me-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center">
