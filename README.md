@@ -124,13 +124,42 @@ Resources:
         - python3.9
 ```
 </details>
+Afterwards, Upload the files, `./backend/lambda_function.py` and `./backend/utils.py` into the lambda function
+
+### Provisioning the DynamoDB Table
+Set the Parition and Sort Key with the following details:
+- Partition Key
+  - Name: FilePath (String)
+- Sort Key
+  - Name: TimeStamp (String)
+
+Then make sure to update the Environment Variables of your lambda function to have the following values:
+```
+{
+  "TABLE_NAME": "<your dynamodb table name>"
+}
+```
+
+### Provisioning the APIGW
+1. Create new APIGW
+2. Create new resource path for `/analyze`
+   1. Enable CORS (Cross Origin Resource Sharing)
+3. Create new method under `/analyze`:
+   1. Method Type: `POST`
+   2. Integration Type: Lambda Function
+   3. Enable Lambda Proxy Integration
+   4. Select the Lambda Function that you've created
+4. Deploy API to stage 
+
+Now you would have generated the backend endpoint that you can use to update your frontend to point to.
 
 ## Connect The Frontend to a Backend
 Create a `.env` file in the `./frontend` directory of this project and fill it:
 ```
 VITE_BACKEND_ENDPOINT=<Your Backend URL here>
 ```
-Please go to the section, [APIs](#apis), to learn more about the Backend API.
+The backend URL is the endpoint generated in the section, [Provisioning the APIGW](#provisioning-the-apigw).  
+For documentation about the API, please go to the section, [APIs](#apis), to learn more about the Backend API.
 
 ## Test Locally
 To test the web application on your local machine, run the following command:
