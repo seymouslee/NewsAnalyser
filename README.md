@@ -75,8 +75,8 @@ You must include **either**:
 
 | Field     | Type   | Required | Description                                                                 |
 |-----------|--------|----------|-----------------------------------------------------------------------------|
-| `text`    | string | Optional | Raw textual content of the article.                                        |
-| `filedir` | string | Optional | The object key that has been uploaded to the Amplify Bucket|
+| `text`    | string | Optional | Raw textual content of the article.                                         |
+| `filedir` | string | Optional | The object key that has been uploaded to the Amplify Bucket                 |
 
 #### Example Request (with Axios)
 
