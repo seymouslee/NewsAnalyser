@@ -49,7 +49,8 @@ zip -r layer.zip python/
 Using the generated SAM template to convey the configuration done on the lambda. I did not write a proper IaC for this due to time limitations.
 <details>
 <summary>Lambda Backend SAM Template</summary>
-```yaml
+
+```
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: An AWS Serverless Application Model template describing your function.
