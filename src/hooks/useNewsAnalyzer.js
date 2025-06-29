@@ -17,6 +17,7 @@ export default function useNewsAnalyzer() {
     setResult(null);
     setError(null);
 
+    const backendEndpoint = import.meta.env.VITE_BACKEND_ENDPOINT;
     const session = await fetchAuthSession();
     const identityId = session.identityId;
 
@@ -68,7 +69,7 @@ export default function useNewsAnalyzer() {
 
     try {
       const response = await axios.post(
-        'https://g33lna9d47.execute-api.ap-southeast-1.amazonaws.com/v1/analyze',
+        backendEndpoint,
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );

@@ -1,12 +1,62 @@
-# React + Vite
+# 📰 TL;DR Times
+<p align="center">
+    <img  alt="TLDR Times main page" src="./readmeResources/mainpage.png">
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TL;DR Times is a web app that takes your news articles and summarises it. 
 
-Currently, two official plugins are available:
+Built with React and Tailscale as the Frontend, and Python Lambda as the backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setting it Up
+### Front End
+#### Requirements
+- node version: v22.16.0
+- npm version: 10.9.2
+#### Installation
+-----
+Clone this repository and install the dependencies needed for this project:
+```bash
+git clone https://github.com/seymouslee/NewsAnalyser.git
+cd NewsAnalyser
+npm install
+```
+#### Installing and Setting Up Amplify
+-----
+Amplify, an AWS service, will be used to manage user sign ups and logins, as well as storage for this web application.
+```
+npm install -g @aws-amplify/cli
+amplify init
+amplify add auth # Select "Default Configuration"
+amplify add storage # Select "Content", and then "Auth Users Only"
+amplify push
+```
 
-## Expanding the ESLint configuration
+#### Test Locally
+-----
+To test the web application on your local machine, run the following command:
+```bash
+npm run dev
+```
+You should be able to see the following output:
+```text
+  VITE v7.0.0  ready in 115 ms
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+Copy and paste the URL in your browser and you should be able to access web page.
+
+#### Connect this Application to a Backend
+-----
+Create a `.env` file in the root directory of this project and fill it:
+```
+VITE_BACKEND_ENDPOINT=<Your Backend URL here>
+```
+#### Deployment
+-----
+To deploy this application to a remote server, run the following command:
+```
+npm run build
+```
+It should generate a folder, `./dist`. Upload the contents within this folder to your server, and you should be able to view the web application in your remote server.
