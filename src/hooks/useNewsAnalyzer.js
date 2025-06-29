@@ -40,7 +40,6 @@ export default function useNewsAnalyzer() {
           },
         }).result;
         formData.append('filedir', result.key);
-        console.log("File as been uploaded.")
       } catch (err) {
         console.log("Error uploading file:", err)
         setError('Failed to upload file.');
