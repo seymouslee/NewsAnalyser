@@ -17,7 +17,6 @@ export default function useNewsAnalyzer() {
     
 
     const formData = new FormData();
-
     
     if (file){
 
@@ -45,8 +44,6 @@ export default function useNewsAnalyzer() {
         console.log("Error uploading file:", err)
         setError('Failed to upload file.');
         return;
-      } finally {
-        setLoading(false);
       }
     } else if (text.trim()){
       formData.append('text', text);
