@@ -7,6 +7,15 @@ TL;DR Times is a web app that takes your news articles and summarises it.
 
 Built with React and Tailscale as the Frontend, and Python Lambda as the backend.
 
+### Table of Contents
+1. [Tech Stack](#tech-stack)
+2. [Setting Up the Front End](#setting-up-the-front-end)
+3. [Setting Up the Back End](#setting-up-the-backend)
+4. [Connect The Frontend to the Backend](#connect-the-frontend-to-the-backend)
+5. [Test Locally](#test-locally)
+6. [Deployment](#deployment)
+7. [APIs](#apis)
+
 ## Tech Stack
 - Front End: React on AWS Amplify
 - Back End: AWS API Gateway and AWS Lambda
@@ -35,9 +44,9 @@ amplify add storage # Select "Content", and then "Auth Users Only"
 amplify push
 ```
 ## Setting up the Backend
-### Requirements
+### Requirements for the Lambda
 - Python version: 3.9
-### Installation
+### Installation for the Lambda
 1. First, we will need to create a lambda layer containing all the packages required for the Lambda Backend to process the articles, and return the results we need.  
 ```bash
 cd NewsAnalyser/backend
@@ -153,7 +162,7 @@ Then make sure to update the Environment Variables of your lambda function to ha
 
 Now you would have generated the backend endpoint that you can use to update your frontend to point to.
 
-## Connect The Frontend to a Backend
+## Connect The Frontend to the Backend
 Create a `.env` file in the `./frontend` directory of this project and fill it:
 ```
 VITE_BACKEND_ENDPOINT=<Your Backend URL here>
