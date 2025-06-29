@@ -6,8 +6,14 @@ export default function ResultDisplay({ result }) {
       <h2 className="text-xl font-semibold mb-2">Summary</h2>
       <p className="mb-4">{result.summary}</p>
       <h2 className="text-xl font-semibold mb-2">Nationalities / Countries</h2>
-      <ul className="list-disc pl-6">
+      <ul className="list-disc pl-6 mb-4">
         {result.nationalities.map((nation, index) => (
+          <li key={index}>{nation}</li>
+        ))}
+      </ul>
+      <h2 className="text-xl font-semibold mb-2">People / Organisations Mentioned</h2>
+      <ul className="list-disc pl-6 mb-4">
+        {result.entities.map((nation, index) => (
           <li key={index}>{nation}</li>
         ))}
       </ul>
