@@ -40,6 +40,7 @@ export default function useNewsAnalyzer() {
           },
         }).result;
         formData.append('filedir', result.key);
+        console.log("File as been uploaded.")
       } catch (err) {
         console.log("Error uploading file:", err)
         setError('Failed to upload file.');
@@ -52,9 +53,6 @@ export default function useNewsAnalyzer() {
       setLoading(false);
       return;
     }
-
-    console.log("this is formdata")
-    console.log(formData)
 
     try {
       const response = await axios.post(
