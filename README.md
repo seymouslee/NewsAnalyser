@@ -133,7 +133,14 @@ Resources:
         - python3.9
 ```
 </details>
-Afterwards, Upload the files, `./backend/lambda_function.py` and `./backend/utils.py` into the lambda function
+
+Afterwards, Upload the files, `./backend/lambda_function.py` and `./backend/utils.py` into the lambda function.  
+Once uploaded, the two files should follow the same directory in the lambda function:
+```
+.
+├── lambda_function.py
+└── utils.py
+```
 
 ### Provisioning the DynamoDB Table
 Set the Parition and Sort Key with the following details:
