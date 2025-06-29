@@ -21,6 +21,12 @@ export default function useNewsAnalyzer() {
     const identityId = session.identityId;
 
     const formData = new FormData();
+
+    if (file && text.trim()){
+      setError('Please either send a text or upload your file.');
+      setLoading(false);
+      return;
+    }
     
     if (file){
 
