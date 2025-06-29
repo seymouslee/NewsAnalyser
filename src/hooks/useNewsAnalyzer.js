@@ -26,6 +26,7 @@ export default function useNewsAnalyzer() {
         console.error('Invalid file type: ', fileName);
         setError('Invalid file type. Please upload a .txt or .docx file.');
         setLoading(false);
+        return;
       }
 
       // upload file to s3
@@ -43,6 +44,7 @@ export default function useNewsAnalyzer() {
       } catch (err) {
         console.log("Error uploading file:", err)
         setError('Failed to upload file.');
+        setLoading(false);
         return;
       }
     } else if (text.trim()){
