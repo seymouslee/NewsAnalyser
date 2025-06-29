@@ -1,0 +1,4 @@
+pydantic-core
+openai
+requests_toolbelt
+python-docx
