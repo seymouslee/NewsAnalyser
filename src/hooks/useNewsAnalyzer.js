@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { uploadData } from 'aws-amplify/storage';
+// import { getCurrentIdentityId } from 'aws-amplify/auth';
+import { fetchAuthSession } from 'aws-amplify/auth';
+
 
 export default function useNewsAnalyzer() {
   const [text, setText] = useState('');
@@ -14,7 +17,8 @@ export default function useNewsAnalyzer() {
     setResult(null);
     setError(null);
 
-    
+    const session = await fetchAuthSession();
+    const identityId = session.identityId;
 
     const formData = new FormData();
     
@@ -40,7 +44,8 @@ export default function useNewsAnalyzer() {
             contentType: file.type,
           },
         }).result;
-        formData.append('filedir', result.key);
+        const fullS3Path = `private/${identityId}/${key}`;
+        formData.append('filedir', fullS3Path);
       } catch (err) {
         console.log("Error uploading file:", err)
         setError('Failed to upload file.');
