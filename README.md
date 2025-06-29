@@ -14,19 +14,18 @@ Built with React and Tailscale as the Frontend, and Python Lambda as the backend
   - Storage: S3
   - User Management: AWS Amplify and AWS Cognito
 
-## Setting it Up
-### Front End
-#### Requirements
+## Setting Up the Front End
+### Requirements
 - node version: v22.16.0
 - npm version: 10.9.2
-#### Installation
+### Installation
 Clone this repository and install the dependencies needed for this project:
 ```bash
 git clone https://github.com/seymouslee/NewsAnalyser.git
-cd NewsAnalyser
+cd NewsAnalyser/frontend
 npm install
 ```
-#### Installing and Setting Up Amplify
+### Installing and Setting Up Amplify
 Amplify, an AWS service, will be used to manage user sign ups and logins, as well as storage for this web application.
 ```
 npm install -g @aws-amplify/cli
@@ -35,8 +34,98 @@ amplify add auth # Select "Default Configuration"
 amplify add storage # Select "Content", and then "Auth Users Only"
 amplify push
 ```
-#### Connect this Application to a Backend
-Create a `.env` file in the root directory of this project and fill it:
+## Setting up the Backend
+### Requirements
+- Python version: 3.9
+### Installation
+1. First, we will need to create a lambda layer containing all the packages required for the Lambda Backend to process the articles, and return the results we need.  
+```bash
+cd NewsAnalyser/backend
+pip install -r requirements.txt --platform manylinux2014_x86_64 --target ./python --only-binary=:all:
+zip -r layer.zip python/
+```
+2. Upload the file layer.zip as a layer under the Lambda service in the AWS Console
+### Provisioning the Lambda Function
+Using the generated SAM template to convey the configuration done on the lambda. I did not write a proper IaC for this due to time limitations.
+<details>
+<summary>Lambda Backend SAM Template</summary>
+```yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: An AWS Serverless Application Model template describing your function.
+Resources:
+  analyzeArticles:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Description: ''
+      MemorySize: 128
+      Timeout: 60
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      EphemeralStorage:
+        Size: 512
+      Environment:
+        Variables:
+          BUCKET_NAME: <Amplify Bucket Name>
+          OPENAI_API_KEY: <Open API Key>
+          TABLE_NAME: <Table Name>
+      EventInvokeConfig:
+        MaximumEventAgeInSeconds: 21600
+        MaximumRetryAttempts: 2
+      Layers:
+        - !Ref Layer1
+      PackageType: Zip
+      Policies:
+        - Statement:
+            - Sid: S3Access
+              Effect: Allow
+              Action:
+                - s3:Get*
+                - s3:Put*
+              Resource: arn:aws:s3:::<BUCKETNAME>-dev/*
+            - Sid: PutItemDynamoDB
+              Effect: Allow
+              Action:
+                - dynamodb:Put*
+              Resource:
+                - >-
+                  arn:aws:dynamodb:ap-southeast-1:888888888888:table/NewsAnalysisResults
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+              Resource: arn:aws:logs:ap-southeast-1:888888888888:*
+            - Effect: Allow
+              Action:
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource:
+                - >-
+                  arn:aws:logs:ap-southeast-1:888888888888:log-group:/aws/lambda/analyzeArticles:*
+      RecursiveLoop: Terminate
+      SnapStart:
+        ApplyOn: None
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /analyze
+            Method: POST
+
+  Layer1:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      ContentUri: <uploaded layer.zip>
+      LayerName: <layer name>
+      CompatibleRuntimes:
+        - python3.9
+```
+</details>
+
+## Connect The Frontend to a Backend
+Create a `.env` file in the `./frontend` directory of this project and fill it:
 ```
 VITE_BACKEND_ENDPOINT=<Your Backend URL here>
 ```
