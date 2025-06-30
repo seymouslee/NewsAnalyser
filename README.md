@@ -21,7 +21,7 @@ Built with React and Tailscale as the Frontend, and Python Lambda and API Gatewa
 Simply paste the raw text of the article into the text input box, or upload a .txt or .docx file in the file dropoff. Then click on submit:  
 (Disclaimer: Loading has be sped up by x20 times)
 <p align="center">
-    <img  alt="TLDR Times main page" src="./demostration/gifs/ezgif-20fc66fad07161.gif">
+    <img  alt="TLDR Times main page" src="./demostration/gifs/demostration.gif">
 </p>
 Sample files have been prepared and placed under the `./demostration/sample` folder. Of course, you can try with any other news articles.
 
