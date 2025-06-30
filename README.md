@@ -21,9 +21,9 @@ Built with React and Tailscale as the Frontend, and Python Lambda and API Gatewa
 Simply paste the raw text of the article into the text input box, or upload a .txt or .docx file in the file dropoff. Then click on submit:  
 (Disclaimer: Loading has be sped up by x20 times)
 <p align="center">
-    <img  alt="TLDR Times main page" src="./demostration/gifs/demostration.gif">
+    <img  alt="TLDR Times main page" src="./readmeResources/demostration/gifs/demostration.gif">
 </p>
-Sample files have been prepared and placed under the `./demostration/sample` folder. Of course, you can try with any other news articles.
+Sample files have been prepared and placed under the `./readmeResources/demostration/sample` folder. Of course, you can try with any other news articles.
 
 ## Tech Stack
 - Front End: React on AWS Amplify
