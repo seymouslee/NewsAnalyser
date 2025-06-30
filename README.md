@@ -8,13 +8,22 @@ TL;DR Times is a web app that takes your news articles and summarises it.
 Built with React and Tailscale as the Frontend, and Python Lambda and API Gateway as the backend.
 
 ### Table of Contents
-1. [Tech Stack](#tech-stack)
-2. [Setting Up the Front End](#setting-up-the-front-end)
-3. [Setting Up the Back End](#setting-up-the-backend)
-4. [Connect The Frontend to the Backend](#connect-the-frontend-to-the-backend)
-5. [Test Locally](#test-locally)
-6. [Deployment](#deployment)
-7. [APIs](#apis)
+1. Demostration
+2. [Tech Stack](#tech-stack)
+3. [Setting Up the Front End](#setting-up-the-front-end)
+4. [Setting Up the Back End](#setting-up-the-backend)
+5. [Connect The Frontend to the Backend](#connect-the-frontend-to-the-backend)
+6. [Test Locally](#test-locally)
+7. [Deployment](#deployment)
+8. [APIs](#apis)
+  
+## Demostration
+Simply paste the raw text of the article into the text input box, or upload a .txt or .docx file in the file dropoff. Then click on submit:  
+(Disclaimer: Loading has be sped up by x20 times)
+<p align="center">
+    <img  alt="TLDR Times main page" src="./demostration/gifs/ezgif-20fc66fad07161.gif">
+</p>
+Sample files have been prepared and placed under the `./demostration/sample` folder. Of course, you can try with any other news articles.
 
 ## Tech Stack
 - Front End: React on AWS Amplify
@@ -198,7 +207,7 @@ To deploy this application to a remote server, run the following command:
 ```
 npm run build
 ```
-It should generate a folder, `./dist`. Upload the contents within this folder to your server, and you should be able to view the web application in your remote server. For this project, I'm using AWS Amplify to host my backend due to its ease of use without much security trade-offs. 
+It should generate a folder, `./dist`. Upload the contents within this folder to your server, and you should be able to view the web application in your remote server. For this project, I'm using AWS Amplify to host my backend due to its ease of use without the security trade-offs. 
 
 ## APIs
 ### `POST /analyze`
