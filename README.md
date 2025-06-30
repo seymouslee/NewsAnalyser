@@ -8,7 +8,7 @@ TL;DR Times is a web app that takes your news articles and summarises it.
 Built with React and Tailscale as the Frontend, and Python Lambda and API Gateway as the backend.
 
 ### Table of Contents
-1. Demostration
+1. [Demostration](#demostration)
 2. [Tech Stack](#tech-stack)
 3. [Setting Up the Front End](#setting-up-the-front-end)
 4. [Setting Up the Back End](#setting-up-the-backend)
